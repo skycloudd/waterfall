@@ -16,19 +16,15 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - name: Install Rust
-              run:
-                  rustup toolchain install nightly --profile minimal
-                  --no-self-update
-
-            - run:
-                  rustup component add rust-src --toolchain
-                  nightly-x86_64-unknown-linux-gnu
+            - name: Install Rust nightly
+              uses: actions-rs/toolchain@v1
+              with:
+                  toolchain: nightly
+                  override: true
+                  components: rust-src
 
             - name: Rust Cache
               uses: Swatinem/rust-cache@v2
-
-            - run: rustc --version
 
             - name: Build
               run: cargo build --verbose
