@@ -31,7 +31,7 @@ jobs:
                   minimal --no-self-update
 
             - name: Install standard library component
-              run: rustup component add rust-std
+              run: rustup +nightly component add rust-std
 
             - name: Install cargo-hack
               uses: taiki-e/install-action@cargo-hack
