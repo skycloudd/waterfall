@@ -10,7 +10,6 @@
 
 use bootloader::{entry_point, BootInfo};
 use waterfall::{
-    memory::BootInfoFrameAllocator,
     println,
     task::{executor::Executor, keyboard, Task},
 };
@@ -20,14 +19,7 @@ extern crate alloc;
 entry_point!(kernel_main);
 
 fn kernel_main(boot_info: &'static BootInfo) -> ! {
-    waterfall::init();
-
-    let phys_mem_offset = x86_64::VirtAddr::new(boot_info.physical_memory_offset);
-    let mut mapper = unsafe { waterfall::memory::init(phys_mem_offset) };
-    let mut frame_allocator = unsafe { BootInfoFrameAllocator::init(&boot_info.memory_map) };
-
-    waterfall::allocator::init_heap(&mut mapper, &mut frame_allocator)
-        .expect("heap initialization failed");
+    waterfall::init(boot_info);
 
     println!("-- welcome to waterfall os --");
 
