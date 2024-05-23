@@ -1,31 +1,46 @@
 #![no_std]
 #![no_main]
+#![warn(clippy::pedantic)]
+#![warn(clippy::nursery)]
 #![warn(clippy::multiple_unsafe_ops_per_block)]
+#![warn(unsafe_op_in_unsafe_fn)]
+#![warn(clippy::alloc_instead_of_core)]
+#![warn(clippy::std_instead_of_core)]
+#![warn(clippy::std_instead_of_alloc)]
 
-use core::panic::PanicInfo;
+use bootloader::{entry_point, BootInfo};
+use waterfall::{
+    memory::BootInfoFrameAllocator,
+    println,
+    task::{executor::Executor, keyboard, Task},
+};
 
-static HELLO: &[u8] = b"Hello World!";
+extern crate alloc;
 
-#[no_mangle]
-pub extern "C" fn _start() -> ! {
-    let vga_buffer = 0xb8000 as *mut u8;
+entry_point!(kernel_main);
 
-    for (i, &byte) in HELLO.iter().enumerate() {
-        let first_byte = unsafe { vga_buffer.offset(i as isize * 2) };
-        let second_byte = unsafe { vga_buffer.offset(i as isize * 2 + 1) };
+fn kernel_main(boot_info: &'static BootInfo) -> ! {
+    waterfall::init();
 
-        unsafe {
-            *first_byte = byte;
-        }
-        unsafe {
-            *second_byte = 0xb;
-        }
-    }
+    let phys_mem_offset = x86_64::VirtAddr::new(boot_info.physical_memory_offset);
+    let mut mapper = unsafe { waterfall::memory::init(phys_mem_offset) };
+    let mut frame_allocator = unsafe { BootInfoFrameAllocator::init(&boot_info.memory_map) };
 
-    panic!();
+    waterfall::allocator::init_heap(&mut mapper, &mut frame_allocator)
+        .expect("heap initialization failed");
+
+    println!("-- welcome to waterfall os --");
+
+    let mut executor = Executor::new();
+
+    executor.spawn(Task::new(keyboard::print_keypresses()));
+
+    executor.run();
 }
 
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
-    loop {}
+fn panic(info: &core::panic::PanicInfo) -> ! {
+    println!("{}", info);
+
+    waterfall::hlt_loop();
 }
