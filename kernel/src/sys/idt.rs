@@ -75,7 +75,18 @@ lazy_static! {
     };
 }
 
-const fn interrupt_index(irq: u8) -> u8 {
+#[repr(u8)]
+pub enum Irq {
+    Timer = 0,
+    Keyboard = 1,
+    Rtc = 8,
+
+    Error = 12,
+    Spurious = 13,
+}
+
+#[must_use]
+pub const fn interrupt_index(irq: u8) -> u8 {
     PIC_1_OFFSET + irq
 }
 
@@ -111,13 +122,12 @@ irq_handler!(irq15_handler, 15);
 pub fn init() {
     IDT.load();
 
-    log!("IDT loaded");
+    log!("idt loaded");
 }
 
 extern "x86-interrupt" fn breakpoint_handler(stack_frame: InterruptStackFrame) {
     println!("EXCEPTION: BREAKPOINT");
     println!("Stack Frame: {:#?}", stack_frame);
-    // panic!();
 }
 
 extern "x86-interrupt" fn double_fault_handler(

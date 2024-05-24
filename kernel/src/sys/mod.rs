@@ -1,6 +1,4 @@
-pub mod acpi;
 pub mod allocator;
-// pub mod apic;
 pub mod clock;
 pub mod cmos;
 pub mod cpu;
@@ -20,8 +18,8 @@ macro_rules! log {
         {
             let uptime = $crate::sys::clock::uptime();
 
-            $crate::println!("[{:.6}] {}", uptime, format_args!($($arg)*));
-            $crate::println_serial!("[{:.6}] {}", uptime, format_args!($($arg)*));
+            $crate::println!("[{:.4}] {}", uptime, format_args!($($arg)*));
+            $crate::println_serial!("[{:.4}] {}", uptime, format_args!($($arg)*));
         }
     }
 }

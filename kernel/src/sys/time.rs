@@ -1,4 +1,4 @@
-use crate::sys::cmos::Cmos;
+use crate::sys::{cmos::Cmos, idt::Irq};
 use crate::{log, sys};
 use core::hint::spin_loop;
 use core::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
@@ -82,11 +82,11 @@ pub fn init() {
     let divider = if PIT_DIVIDER < 65536 { PIT_DIVIDER } else { 0 };
     let channel = 0;
     set_pit_frequency_divider(u16::try_from(divider).unwrap(), channel);
-    sys::idt::set_irq_handler(0, pit_interrupt_handler);
+    sys::idt::set_irq_handler(Irq::Timer as u8, pit_interrupt_handler);
 
     log!("pit initialized");
 
-    sys::idt::set_irq_handler(8, rtc_interrupt_handler);
+    sys::idt::set_irq_handler(Irq::Rtc as u8, rtc_interrupt_handler);
     Cmos::new().enable_update_interrupt();
 
     let calibration_time = 250_000;

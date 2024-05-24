@@ -56,7 +56,7 @@ pub fn init() {
 
     unsafe { load_tss(GDT.1.tss) };
 
-    log!("GDT loaded");
+    log!("gdt loaded");
 }
 
 const STACK_SIZE: usize = 4096 * 5;

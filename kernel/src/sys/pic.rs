@@ -5,7 +5,7 @@ use spin::Mutex;
 pub fn init() {
     unsafe { PICS.lock().initialize() };
 
-    log!("PIC initialized");
+    log!("pic initialized");
 
     x86_64::instructions::interrupts::enable();
 

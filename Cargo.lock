@@ -3,16 +3,6 @@
 version = 3
 
 [[package]]
-name = "acpi"
-version = "5.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e248409195304021f61b39ba2628f62a45a3abf6119669d44b3399d60eabe4c3"
-dependencies = [
- "bit_field",
- "log",
-]
-
-[[package]]
 name = "anyhow"
 version = "1.0.86"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -592,7 +582,6 @@ checksum = "49f1f14873335454500d59611f1cf4a4b0f786f9ac11f4312a78e4cf2566695b"
 name = "kernel"
 version = "0.1.0"
 dependencies = [
- "acpi",
  "bit_field",
  "bootloader_api",
  "chrono",
@@ -1188,6 +1177,7 @@ name = "waterfall"
 version = "0.1.0"
 dependencies = [
  "bootloader",
+ "futures-util",
  "kernel",
  "ovmf-prebuilt",
 ]

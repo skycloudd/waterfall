@@ -35,14 +35,6 @@ pub fn init(boot_info: &'static mut BootInfo) {
     sys::clock::init();
     sys::cpu::init();
 
-    // let acpi_tables = sys::acpi::init(boot_info.rsdp_addr.into_option().unwrap());
-
-    // let platform_info = acpi_tables.platform_info().unwrap();
-
-    // if let acpi::InterruptModel::Apic(apic) = platform_info.interrupt_model {
-    //     sys::apic::init(apic);
-    // }
-
     log!("kernel initialized\n");
 }
 

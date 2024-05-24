@@ -4,20 +4,18 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-acpi = "5.0.0"
 bit_field = "0.10.2"
 bootloader_api = "0.11.7"
 chrono = { version = "0.4.38", default-features = false, features = ["alloc"] }
 conquer-once = { version = "0.4.0", default-features = false }
 crossbeam-queue = { version = "0.3.11", default-features = false, features = [
     "alloc",
-    "nightly",
 ] }
 futures-util = { version = "0.3.30", default-features = false, features = [
     "alloc",
 ] }
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
-linked_list_allocator = { version = "0.10.5", features = ["use_spin_nightly"] }
+linked_list_allocator = "0.10.5"
 noto-sans-mono-bitmap = { version = "0.3.0", default-features = false, features = [
     "regular",
     "size_16",
@@ -29,8 +27,8 @@ pc-keyboard = "0.7.0"
 pic8259 = "0.11.0"
 raw-cpuid = "11.0.2"
 spin = "0.9.8"
-uart_16550 = { version = "0.3.0", features = ["nightly"] }
-uefi = { version = "0.28.0", features = ["alloc"] }
+uart_16550 = "0.3.0"
+uefi = "0.28.0"
 x86_64 = "0.15.1"
 
 [lints.rust]

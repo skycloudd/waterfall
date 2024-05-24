@@ -1,4 +1,4 @@
-use crate::sys::idt;
+use crate::sys::idt::{self, Irq};
 use crate::{log, print, println};
 use conquer_once::spin::OnceCell;
 use core::pin::Pin;
@@ -14,7 +14,7 @@ static SCANCODE_QUEUE: OnceCell<ArrayQueue<u8>> = OnceCell::uninit();
 static WAKER: AtomicWaker = AtomicWaker::new();
 
 pub fn init() {
-    idt::set_irq_handler(1, interrupt_handler);
+    idt::set_irq_handler(Irq::Keyboard as u8, interrupt_handler);
 
     log!("keyboard initialized");
 }
