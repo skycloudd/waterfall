@@ -6,40 +6,10 @@ use num_traits::float::FloatCore;
 
 const DAYS_BEFORE_MONTH: [u64; 13] = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
 
-#[derive(Debug, Clone)]
-struct Uptime;
-
-impl Default for Uptime {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-impl Uptime {
-    const fn new() -> Self {
-        Self {}
-    }
-}
-
 #[must_use]
 #[allow(clippy::cast_precision_loss)]
 pub fn uptime() -> f64 {
     sys::time::time_between_ticks() * sys::time::ticks() as f64
-}
-
-#[derive(Debug, Clone)]
-struct Realtime;
-
-impl Default for Realtime {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-impl Realtime {
-    const fn new() -> Self {
-        Self {}
-    }
 }
 
 #[must_use]

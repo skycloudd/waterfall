@@ -1177,7 +1177,6 @@ name = "waterfall"
 version = "0.1.0"
 dependencies = [
  "bootloader",
- "futures-util",
  "kernel",
  "ovmf-prebuilt",
 ]

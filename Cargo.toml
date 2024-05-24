@@ -11,5 +11,4 @@ kernel = { path = "kernel", artifact = "bin", target = "x86_64-unknown-none" }
 members = ["kernel"]
 
 [dependencies]
-futures-util = { version = "0.3.30", default-features = false, features = ["alloc"] }
 ovmf-prebuilt = "0.1.0-alpha.1"
