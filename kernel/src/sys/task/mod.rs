@@ -1,10 +1,8 @@
 use alloc::boxed::Box;
-use core::{
-    future::Future,
-    pin::Pin,
-    sync::atomic::{AtomicU64, Ordering},
-    task::{Context, Poll},
-};
+use core::future::Future;
+use core::pin::Pin;
+use core::sync::atomic::{AtomicU64, Ordering};
+use core::task::{Context, Poll};
 
 pub mod executor;
 pub mod keyboard;
@@ -27,13 +25,13 @@ impl Task {
     }
 }
 
-static NEXT_ID: AtomicU64 = AtomicU64::new(0);
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 struct TaskId(u64);
 
 impl TaskId {
     fn new() -> Self {
+        static NEXT_ID: AtomicU64 = AtomicU64::new(0);
+
         Self(NEXT_ID.fetch_add(1, Ordering::Relaxed))
     }
 }

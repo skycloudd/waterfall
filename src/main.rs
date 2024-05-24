@@ -1,38 +1,23 @@
-#![no_std]
-#![no_main]
-#![warn(clippy::pedantic)]
-#![warn(clippy::nursery)]
-#![warn(clippy::multiple_unsafe_ops_per_block)]
-#![warn(unsafe_op_in_unsafe_fn)]
-#![warn(clippy::alloc_instead_of_core)]
-#![warn(clippy::std_instead_of_core)]
-#![warn(clippy::std_instead_of_alloc)]
+fn main() {
+    let uefi_path = env!("UEFI_PATH");
+    let bios_path = env!("BIOS_PATH");
 
-use bootloader::{entry_point, BootInfo};
-use waterfall::{
-    println,
-    task::{executor::Executor, keyboard, Task},
-};
+    let uefi = true;
 
-extern crate alloc;
+    let mut cmd = std::process::Command::new("qemu-system-x86_64");
 
-entry_point!(kernel_main);
+    if uefi {
+        cmd.arg("-bios").arg(ovmf_prebuilt::ovmf_pure_efi());
+        cmd.arg("-drive")
+            .arg(format!("format=raw,file={uefi_path}"));
+    } else {
+        cmd.arg("-drive")
+            .arg(format!("format=raw,file={bios_path}"));
+    }
 
-fn kernel_main(boot_info: &'static BootInfo) -> ! {
-    waterfall::init(boot_info);
+    cmd.arg("-serial").arg("stdio");
 
-    println!("-- welcome to waterfall os --");
+    let mut child = cmd.spawn().unwrap();
 
-    let mut executor = Executor::new();
-
-    executor.spawn(Task::new(keyboard::print_keypresses()));
-
-    executor.run();
-}
-
-#[panic_handler]
-fn panic(info: &core::panic::PanicInfo) -> ! {
-    println!("{}", info);
-
-    waterfall::hlt_loop();
+    child.wait().unwrap();
 }

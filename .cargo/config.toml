@@ -1,9 +1,2 @@
-[build]
-target = "x86_64-waterfall.json"
-
 [unstable]
-build-std-features = ["compiler-builtins-mem"]
-build-std = ["core", "alloc", "compiler_builtins"]
-
-[target.'cfg(target_os = "none")']
-runner = "bootimage runner"
+bindeps = true
