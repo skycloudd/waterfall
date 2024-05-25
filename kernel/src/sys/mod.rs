@@ -1,4 +1,5 @@
 pub mod allocator;
+pub mod ata;
 pub mod clock;
 pub mod cmos;
 pub mod cpu;

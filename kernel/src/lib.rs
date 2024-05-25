@@ -10,6 +10,7 @@ use x86_64::instructions::port::Port;
 
 extern crate alloc;
 
+pub mod api;
 pub mod sys;
 
 pub fn init(boot_info: &'static mut BootInfo) {
@@ -34,6 +35,8 @@ pub fn init(boot_info: &'static mut BootInfo) {
     );
     sys::clock::init();
     sys::cpu::init();
+
+    sys::ata::init();
 
     log!("kernel initialized\n");
 }
