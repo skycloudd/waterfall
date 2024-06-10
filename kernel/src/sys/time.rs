@@ -42,6 +42,7 @@ fn rdtsc() -> u64 {
 
 pub fn sleep(seconds: f64) {
     let start = sys::clock::uptime();
+    #[allow(clippy::while_float)]
     while sys::clock::uptime() - start < seconds {
         halt();
     }

@@ -6,7 +6,6 @@
 
 use bootloader_api::config::Mapping;
 use bootloader_api::{BootInfo, BootloaderConfig};
-use x86_64::instructions::port::Port;
 
 extern crate alloc;
 
@@ -52,16 +51,3 @@ pub static BOOTLOADER_CONFIG: BootloaderConfig = {
     config.mappings.physical_memory = Some(Mapping::Dynamic);
     config
 };
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-#[repr(u32)]
-pub enum QemuExitCode {
-    Success = 0x10,
-    Failed = 0x11,
-}
-
-pub fn exit_qemu(exit_code: QemuExitCode) {
-    unsafe {
-        Port::new(0xf4).write(exit_code as u32);
-    }
-}
