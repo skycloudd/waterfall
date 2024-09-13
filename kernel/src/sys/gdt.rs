@@ -70,24 +70,24 @@ lazy_static! {
 
         tss.privilege_stack_table[0] = {
             static mut STACK: [u8; STACK_SIZE] = [0; STACK_SIZE];
-            VirtAddr::from_ptr(unsafe { addr_of!(STACK) }) + STACK_SIZE as u64
+            VirtAddr::from_ptr(addr_of!(STACK)) + STACK_SIZE as u64
         };
 
         tss.interrupt_stack_table[DOUBLE_FAULT_IST_INDEX as usize] = {
             static mut STACK: [u8; STACK_SIZE] = [0; STACK_SIZE];
 
-            VirtAddr::from_ptr(unsafe { addr_of!(STACK) }) + STACK_SIZE as u64
+            VirtAddr::from_ptr(addr_of!(STACK)) + STACK_SIZE as u64
         };
 
         tss.interrupt_stack_table[PAGE_FAULT_IST_INDEX as usize] = {
             static mut STACK: [u8; STACK_SIZE] = [0; STACK_SIZE];
 
-            VirtAddr::from_ptr(unsafe { addr_of!(STACK) }) + STACK_SIZE as u64
+            VirtAddr::from_ptr(addr_of!(STACK)) + STACK_SIZE as u64
         };
 
         tss.interrupt_stack_table[GENERAL_PROTECTION_FAULT_IST_INDEX as usize] = {
             static mut STACK: [u8; STACK_SIZE] = [0; STACK_SIZE];
-            VirtAddr::from_ptr(unsafe { addr_of!(STACK) }) + STACK_SIZE as u64
+            VirtAddr::from_ptr(addr_of!(STACK)) + STACK_SIZE as u64
         };
 
         tss
