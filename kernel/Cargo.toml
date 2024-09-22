@@ -23,7 +23,7 @@ noto-sans-mono-bitmap = { version = "0.3.0", default-features = false, features 
     "unicode-specials",
 ] }
 num-traits = { version = "0.2.19", default-features = false }
-pc-keyboard = "0.7.0"
+pc-keyboard = "0.8.0"
 pic8259 = "0.11.0"
 raw-cpuid = "11.1.0"
 spin = "0.9.8"
