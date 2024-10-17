@@ -1,7 +1,7 @@
 use super::pic::{PICS, PIC_1_OFFSET};
 use super::{gdt, syscall};
 use crate::{log, println};
-use core::arch::asm;
+use core::arch::naked_asm;
 use lazy_static::lazy_static;
 use spin::Mutex;
 use x86_64::instructions::interrupts;
@@ -186,7 +186,7 @@ macro_rules! wrap {
         #[naked]
         unsafe extern "sysv64" fn $w() {
             unsafe{
-                asm!(
+                naked_asm!(
                     "push rax",
                     "push rcx",
                     "push rdx",
@@ -210,8 +210,7 @@ macro_rules! wrap {
                     "pop rcx",
                     "pop rax",
                     "iretq",
-                    sym $fn,
-                    options(noreturn)
+                    sym $fn
                 );
             }
         }

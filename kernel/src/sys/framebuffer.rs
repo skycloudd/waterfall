@@ -8,7 +8,7 @@ use x86_64::instructions::interrupts;
 
 #[macro_export]
 macro_rules! print {
-    ($($arg:tt)*) => ($crate::sys::framebuffer::_print(format_args!($($arg)*)));
+    ($($arg:tt)*) => ($crate::sys::framebuffer::print(format_args!($($arg)*)));
 }
 
 #[macro_export]
@@ -18,7 +18,7 @@ macro_rules! println {
 }
 
 #[doc(hidden)]
-pub fn _print(args: core::fmt::Arguments) {
+pub fn print(args: core::fmt::Arguments) {
     use core::fmt::Write;
 
     interrupts::without_interrupts(|| {

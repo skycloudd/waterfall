@@ -7,7 +7,7 @@ use x86_64::instructions::interrupts;
 #[macro_export]
 macro_rules! print_serial {
     ($($arg:tt)*) => {
-        $crate::sys::serial::_print(format_args!($($arg)*));
+        $crate::sys::serial::print(format_args!($($arg)*));
     };
 }
 
@@ -20,7 +20,7 @@ macro_rules! println_serial {
 }
 
 #[doc(hidden)]
-pub fn _print(args: ::core::fmt::Arguments) {
+pub fn print(args: ::core::fmt::Arguments) {
     use core::fmt::Write;
 
     interrupts::without_interrupts(|| {

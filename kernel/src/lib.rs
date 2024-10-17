@@ -1,7 +1,6 @@
 #![no_std]
 #![feature(abi_x86_interrupt)]
 #![feature(allocator_api)]
-#![feature(const_mut_refs)]
 #![feature(naked_functions)]
 
 use bootloader_api::config::Mapping;
