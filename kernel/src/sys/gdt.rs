@@ -38,6 +38,7 @@ lazy_static! {
     };
 }
 
+#[derive(Debug)]
 pub struct Selectors {
     code: SegmentSelector,
     data: SegmentSelector,

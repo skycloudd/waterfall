@@ -57,6 +57,7 @@ impl Rtc {
     }
 }
 
+#[derive(Debug)]
 pub struct Cmos {
     addr: Port<u8>,
     data: Port<u8>,

@@ -19,6 +19,7 @@ pub fn init() {
     log!("keyboard initialized");
 }
 
+#[derive(Debug)]
 pub struct ScancodeStream {
     _private: (),
 }

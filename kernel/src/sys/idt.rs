@@ -75,6 +75,7 @@ lazy_static! {
     };
 }
 
+#[derive(Debug)]
 #[repr(u8)]
 pub enum Irq {
     Timer = 0,

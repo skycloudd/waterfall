@@ -1,3 +1,4 @@
+#[derive(Debug)]
 #[repr(usize)]
 pub enum Syscall {
     Exit = 0,

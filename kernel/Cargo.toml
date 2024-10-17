@@ -11,7 +11,7 @@ conquer-once = { version = "0.4.0", default-features = false }
 crossbeam-queue = { version = "0.3.11", default-features = false, features = [
     "alloc",
 ] }
-futures-util = { version = "0.3.30", default-features = false, features = [
+futures-util = { version = "0.3.31", default-features = false, features = [
     "alloc",
 ] }
 lazy_static = { version = "1.5.0", features = ["spin_no_std"] }
@@ -35,8 +35,8 @@ x86_64 = "0.15.1"
 unsafe_op_in_unsafe_fn = "warn"
 
 [lints.clippy]
-pedantic = "warn"
-nursery = "warn"
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
 multiple_unsafe_ops_per_block = "warn"
 alloc_instead_of_core = "warn"
 std_instead_of_core = "warn"

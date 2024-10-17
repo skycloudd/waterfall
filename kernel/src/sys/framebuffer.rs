@@ -66,6 +66,7 @@ fn get_char_raster(c: char) -> RasterizedChar {
     get(c).unwrap_or_else(|| get(BACKUP_CHAR).expect("Should get raster of backup char."))
 }
 
+#[derive(Debug)]
 pub struct FrameBufferWriter {
     framebuffer: &'static mut [u8],
     info: FrameBufferInfo,
