@@ -1,7 +1,7 @@
 #[derive(Debug)]
 #[repr(usize)]
 pub enum Syscall {
-    Exit = 0,
+    Sleep = 1,
 }
 
 impl TryFrom<usize> for Syscall {
@@ -9,7 +9,7 @@ impl TryFrom<usize> for Syscall {
 
     fn try_from(value: usize) -> Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::Exit),
+            1 => Ok(Self::Sleep),
             _ => Err(()),
         }
     }

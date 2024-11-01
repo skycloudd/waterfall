@@ -48,7 +48,7 @@ mod font_constants {
 
     pub const FONT_WEIGHT: FontWeight = FontWeight::Regular;
 
-    pub const CHAR_RASTER_HEIGHT: RasterHeight = RasterHeight::Size16;
+    pub const CHAR_RASTER_HEIGHT: RasterHeight = RasterHeight::Size20;
 
     pub const CHAR_RASTER_WIDTH: usize = get_raster_width(FONT_WEIGHT, CHAR_RASTER_HEIGHT);
 

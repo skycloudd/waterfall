@@ -2,13 +2,15 @@ use self::number::Syscall;
 use core::arch::asm;
 
 pub mod number;
+mod service;
 
 #[must_use]
-pub fn dispatcher(n: usize, _arg1: usize, _arg2: usize, _arg3: usize, _arg4: usize) -> usize {
+pub fn dispatcher(n: usize, arg1: usize, _arg2: usize, _arg3: usize, _arg4: usize) -> usize {
     match n.try_into() {
         Ok(number) => match number {
-            Syscall::Exit => {
-                panic!("exit");
+            Syscall::Sleep => {
+                service::sleep(f64::from_bits(arg1 as u64));
+                0
             }
         },
         Err(()) => panic!("invalid syscall number {}", n),

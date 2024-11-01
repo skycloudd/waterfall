@@ -3,8 +3,28 @@ use crate::{log, sys};
 use alloc::string::{String, ToString};
 use chrono::DateTime;
 use num_traits::float::FloatCore;
+use x86_64::instructions::interrupts;
 
 const DAYS_BEFORE_MONTH: [u64; 13] = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
+
+pub fn sleep(seconds: f64) {
+    let start = uptime();
+
+    #[allow(clippy::while_float)]
+    while uptime() - start < seconds {
+        halt();
+    }
+}
+
+pub fn halt() {
+    let disabled = !interrupts::are_enabled();
+
+    interrupts::enable_and_hlt();
+
+    if disabled {
+        interrupts::disable();
+    }
+}
 
 #[must_use]
 #[allow(clippy::cast_precision_loss)]
