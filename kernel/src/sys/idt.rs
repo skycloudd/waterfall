@@ -1,13 +1,17 @@
-use super::pic::{PICS, PIC_1_OFFSET};
-use super::{gdt, syscall};
+use super::{
+    gdt,
+    pic::{PICS, PIC_1_OFFSET},
+    syscall,
+};
 use crate::{log, println};
 use core::arch::naked_asm;
 use lazy_static::lazy_static;
 use spin::Mutex;
-use x86_64::instructions::interrupts;
-use x86_64::instructions::port::Port;
-use x86_64::registers::control::Cr2;
-use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame, PageFaultErrorCode};
+use x86_64::{
+    instructions::{interrupts, port::Port},
+    registers::control::Cr2,
+    structures::idt::{InterruptDescriptorTable, InterruptStackFrame, PageFaultErrorCode},
+};
 
 const PIC1: u16 = 0x21;
 const PIC2: u16 = 0xA1;

@@ -1,5 +1,7 @@
-use crate::sys::cmos::Cmos;
-use crate::{log, sys};
+use crate::{
+    log,
+    sys::{self, cmos::Cmos},
+};
 use alloc::string::{String, ToString};
 use chrono::DateTime;
 use num_traits::float::FloatCore;

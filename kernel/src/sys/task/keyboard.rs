@@ -1,11 +1,14 @@
-use crate::sys::idt::{self, Irq};
-use crate::{log, print, println};
+use crate::{
+    log, print, println,
+    sys::idt::{self, Irq},
+};
 use conquer_once::spin::OnceCell;
-use core::pin::Pin;
-use core::task::{Context, Poll};
+use core::{
+    pin::Pin,
+    task::{Context, Poll},
+};
 use crossbeam_queue::ArrayQueue;
-use futures_util::task::AtomicWaker;
-use futures_util::{Stream, StreamExt};
+use futures_util::{task::AtomicWaker, Stream, StreamExt};
 use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard, ScancodeSet1};
 use x86_64::instructions::port::Port;
 

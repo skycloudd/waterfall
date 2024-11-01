@@ -3,8 +3,7 @@
 #![feature(allocator_api)]
 #![feature(naked_functions)]
 
-use bootloader_api::config::Mapping;
-use bootloader_api::{BootInfo, BootloaderConfig};
+use bootloader_api::{config::Mapping, BootInfo, BootloaderConfig};
 
 extern crate alloc;
 

@@ -1,10 +1,12 @@
 use super::allocator;
 use crate::log;
 use bootloader_api::info::{MemoryRegionKind, MemoryRegions};
-use x86_64::instructions::interrupts;
-use x86_64::registers::control::Cr3;
-use x86_64::structures::paging::{FrameAllocator, OffsetPageTable, PageTable, PhysFrame, Size4KiB};
-use x86_64::{PhysAddr, VirtAddr};
+use x86_64::{
+    instructions::interrupts,
+    registers::control::Cr3,
+    structures::paging::{FrameAllocator, OffsetPageTable, PageTable, PhysFrame, Size4KiB},
+    PhysAddr, VirtAddr,
+};
 
 pub static mut PHYS_MEM_OFFSET: u64 = 0;
 

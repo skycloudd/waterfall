@@ -1,7 +1,5 @@
 use super::{Task, TaskId};
-use alloc::collections::BTreeMap;
-use alloc::sync::Arc;
-use alloc::task::Wake;
+use alloc::{collections::BTreeMap, sync::Arc, task::Wake};
 use core::task::{Context, Poll, Waker};
 use crossbeam_queue::ArrayQueue;
 use x86_64::instructions::interrupts;

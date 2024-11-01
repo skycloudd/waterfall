@@ -1,6 +1,8 @@
 use super::Locked;
-use core::alloc::{GlobalAlloc, Layout};
-use core::ptr::NonNull;
+use core::{
+    alloc::{GlobalAlloc, Layout},
+    ptr::NonNull,
+};
 
 const BLOCK_SIZES: &[usize] = &[8, 16, 32, 64, 128, 256, 512, 1024, 2048];
 

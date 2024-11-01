@@ -3,9 +3,11 @@
 
 use bootloader_api::{entry_point, BootInfo};
 use core::panic::PanicInfo;
-use kernel::sys::task::executor::Executor;
-use kernel::sys::task::{keyboard, Task};
-use kernel::{println, BOOTLOADER_CONFIG};
+use kernel::{
+    println,
+    sys::task::{executor::Executor, keyboard, Task},
+    BOOTLOADER_CONFIG,
+};
 
 extern crate alloc;
 

@@ -1,7 +1,6 @@
 use bit_field::BitField;
 use core::hint::spin_loop;
-use x86_64::instructions::interrupts;
-use x86_64::instructions::port::Port;
+use x86_64::instructions::{interrupts, port::Port};
 
 const RTC_CENTURY: u16 = 2000;
 

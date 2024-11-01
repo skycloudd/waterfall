@@ -1,5 +1,5 @@
-use self::number::Syscall;
 use core::arch::asm;
+use number::Syscall;
 
 pub mod number;
 mod service;

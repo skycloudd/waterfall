@@ -1,9 +1,12 @@
-use crate::sys::{cmos::Cmos, idt::Irq};
-use crate::{log, sys};
-use core::hint::spin_loop;
-use core::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
-use x86_64::instructions::interrupts;
-use x86_64::instructions::port::Port;
+use crate::{
+    log,
+    sys::{self, cmos::Cmos, idt::Irq},
+};
+use core::{
+    hint::spin_loop,
+    sync::atomic::{AtomicU64, AtomicUsize, Ordering},
+};
+use x86_64::instructions::{interrupts, port::Port};
 
 pub const PIT_FREQUENCY: f64 = 3_579_545.0 / 3.0;
 const PIT_DIVIDER: usize = 1 << 16;
