@@ -28,7 +28,7 @@ raw-cpuid = "11.2.0"
 spin = "0.9.8"
 uart_16550 = "0.3.2"
 uefi = "0.33.0"
-x86_64 = "0.15.1"
+x86_64 = "0.15.2"
 
 [lints.rust]
 unsafe_op_in_unsafe_fn = "warn"
