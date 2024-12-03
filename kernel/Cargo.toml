@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 bit_field = "0.10.2"
-bootloader_api = "0.11.8"
+bootloader_api = "0.11.9"
 chrono = { version = "0.4.38", default-features = false, features = ["alloc"] }
 conquer-once = { version = "0.4.0", default-features = false }
 crossbeam-queue = { version = "0.3.11", default-features = false, features = [
@@ -28,7 +28,7 @@ raw-cpuid = "11.2.0"
 spin = "0.9.8"
 uart_16550 = "0.3.2"
 uefi = "0.33.0"
-x86_64 = "0.15.1"
+x86_64 = "0.15.2"
 
 [lints.rust]
 unsafe_op_in_unsafe_fn = "warn"
