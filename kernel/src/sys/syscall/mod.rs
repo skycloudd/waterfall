@@ -1,3 +1,4 @@
+use crate::log;
 use core::arch::asm;
 use number::Syscall;
 
@@ -9,7 +10,11 @@ pub fn dispatcher(n: usize, arg1: usize, _arg2: usize, _arg3: usize, _arg4: usiz
     match n.try_into() {
         Ok(number) => match number {
             Syscall::Sleep => {
-                service::sleep(f64::from_bits(arg1 as u64));
+                let seconds = f64::from_bits(arg1 as u64);
+
+                log!("syscall: sleep {seconds}");
+
+                service::sleep(seconds);
                 0
             }
         },
