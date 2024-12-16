@@ -8,7 +8,7 @@ bit_field = "0.10.2"
 bootloader_api = "0.11.9"
 chrono = { version = "0.4.39", default-features = false, features = ["alloc"] }
 conquer-once = { version = "0.4.0", default-features = false }
-crossbeam-queue = { version = "0.3.11", default-features = false, features = [
+crossbeam-queue = { version = "0.3.12", default-features = false, features = [
     "alloc",
 ] }
 futures-util = { version = "0.3.31", default-features = false, features = [
